@@ -15,89 +15,72 @@ const AuthForm: React.FC<AuthFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Title>ログイン</Title>
-      <InputGroup>
-        <Label htmlFor="email">メールアドレス</Label>
-        <Input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </InputGroup>
-      <InputGroup>
-        <Label htmlFor="password">パスワード</Label>
-        <Input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </InputGroup>
-      <Button type="submit">ログイン</Button>
-    </Form>
+    <StyledForm onSubmit={handleSubmit}>
+      <StyledInput
+        type="email"
+        placeholder="メールアドレス"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <StyledInput
+        type="password"
+        placeholder="パスワード"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <StyledButton type="submit">ログイン</StyledButton>
+    </StyledForm>
   );
 };
 
-const Form = styled.form`
+const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  padding: 2rem;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-`;
-
-const Title = styled.h2`
-  margin-bottom: 2rem;
-`;
-
-const InputGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.5rem;
-  width: 100%;
-`;
-
-const Label = styled.label`
-  margin-bottom: 0.5rem;
-`;
-
-const Input = styled.input`
-  padding: 0.5rem;
-  font-size: 1rem;
+  padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
 `;
 
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+const StyledInput = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
+
+const StyledButton = styled.button`
+  width: 100%;
+  padding: 10px;
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.2s;
 
   &:hover {
     background-color: #0056b3;
   }
 `;
 
-const SampleAuthForm: React.FC = () => {
+const App: React.FC = () => {
   const handleSubmit = (email: string, password: string) => {
     console.log('Email:', email);
     console.log('Password:', password);
-    // ここでAPIリクエストやその他の処理を行う
   };
 
-  return <AuthForm onSubmit={handleSubmit} />;
+  return (
+    <div>
+      <h1>認証画面</h1>
+      <AuthForm onSubmit={handleSubmit} />
+    </div>
+  );
 };
 
-export default SampleAuthForm;
+export default App;
